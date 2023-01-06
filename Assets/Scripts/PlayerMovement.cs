@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     public float gravity = -9.8f;
 
+    public float jumpHeight = 2f;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -42,5 +44,13 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(playerVelocity * Time.deltaTime);
         Debug.Log(playerVelocity.y);
+    }
+
+    public void Jump()
+    {
+        if (isGrounded)
+        {
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -1.0f * gravity);
+        }
     }
 }
