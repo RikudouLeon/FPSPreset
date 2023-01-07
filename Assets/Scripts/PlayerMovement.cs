@@ -13,6 +13,12 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpHeight = 2f;
 
+    public bool crouching = false;
+    public bool lerpCrouch = false;
+    public float crouchTimer = 1;
+
+    public bool sprinting = false;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -21,6 +27,28 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         isGrounded = controller.isGrounded;
+
+        if (lerpCrouch)
+        {
+            crouchTimer += Time.deltaTime;
+            float p = crouchTimer / 1;
+            p *= p;
+
+            if (crouching)
+            {
+                controller.height = Mathf.Lerp(controller.height, 1, p);
+            }
+            else
+            {
+                controller.height = Mathf.Lerp(controller.height, 2, p);
+            }
+
+            if (p > 1)
+            {
+                lerpCrouch = false;
+                crouchTimer = 0f;
+            }
+        }
     }
 
     // Receives inputs for InputManager.cs and applies them to character controller
@@ -36,13 +64,13 @@ public class PlayerMovement : MonoBehaviour
 
         // Gravity
         playerVelocity.y += gravity * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
 
         if (isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2f;
         }
 
-        controller.Move(playerVelocity * Time.deltaTime);
         Debug.Log(playerVelocity.y);
     }
 
@@ -51,6 +79,26 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -1.0f * gravity);
+        }
+    }
+
+    public void Crouch()
+    {
+        crouching = !crouching;
+        crouchTimer = 0;
+        lerpCrouch = true;
+    }
+
+    public void Sprint()
+    {
+        sprinting = !sprinting;
+        if (sprinting)
+        {
+            speed = 10;
+        }
+        else
+        {
+            speed = 5;
         }
     }
 }
