@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour
 
     private PlayerMovement movement;
 
+    private PlayerLook look;
+
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -17,11 +19,18 @@ public class InputManager : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
 
         onFoot.Jump.performed += ctx => movement.Jump();
+
+        look = GetComponent<PlayerLook>();
     }
 
     void FixedUpdate()
     {
-        movement.ProcessMove(onFoot.Movement.ReadValue<Vector2>()); // Moves the player using value from movement action
+        movement.ControlMove(onFoot.Movement.ReadValue<Vector2>()); // Moves the player using value from movement action
+    }
+
+    private void LateUpdate()
+    {
+        look.ControlLook(onFoot.Look.ReadValue<Vector2>());
     }
 
     private void OnEnable()

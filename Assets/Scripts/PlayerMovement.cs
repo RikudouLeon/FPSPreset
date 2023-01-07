@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Receives inputs for InputManager.cs and applies them to character controller
-    public void ProcessMove (Vector2 input)
+    public void ControlMove (Vector2 input)
     {
         // On foot movement
         Vector3 moveDirection = Vector3.zero;
