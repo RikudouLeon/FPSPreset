@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity.y = -2f;
         }
 
-        Debug.Log(playerVelocity.y);
+        //Debug.Log(playerVelocity.y);
     }
 
     public void Jump()
