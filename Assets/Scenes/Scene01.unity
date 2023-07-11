@@ -950,6 +950,7 @@ GameObject:
   - component: {fileID: 903447399}
   - component: {fileID: 903447398}
   - component: {fileID: 903447402}
+  - component: {fileID: 903447403}
   m_Layer: 6
   m_Name: Keypad
   m_TagString: Untagged
@@ -1046,7 +1047,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   promptMessage: Use Keypad [E]
+  useEvents: 1
   door: {fileID: 343236139}
+--- !u!114 &903447403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903447397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150f6c9549a80b34cab34abccb2b0977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1062336087}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: 5042382254977a94db66dcde8100d0a4, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1062336084
 GameObject:
   m_ObjectHideFlags: 0
