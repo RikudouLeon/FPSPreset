@@ -24,6 +24,6 @@ public class Keypad : Interaction
     {
         doorOpen = !doorOpen;
         door.GetComponent<Animator>().SetBool("IsOpen", doorOpen);
-        //Debug.Log("Interacted with " + gameObject.name);
+        Debug.Log("Interacted with " + gameObject.name);
     }
 }
