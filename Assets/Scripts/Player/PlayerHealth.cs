@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {   
@@ -86,6 +85,7 @@ public class PlayerHealth : MonoBehaviour
         health -= damageAmount;
         lerpTimer = 0f;
         durationTimer = 0;
+
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1); // full damage overlay when player is damaged
     }
 

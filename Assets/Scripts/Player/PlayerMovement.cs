@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public bool lerpCrouch = false;
     public float crouchTimer = 1;
 
+    public bool proning = false;
+    public bool lerpProne = false;
+    public float proneTimer = 1;
+
     public bool sprinting = false;
 
     void Start()
@@ -47,6 +51,28 @@ public class PlayerMovement : MonoBehaviour
             {
                 lerpCrouch = false;
                 crouchTimer = 0f;
+            }
+        }
+
+        if (lerpProne)
+        {
+            proneTimer += Time.deltaTime;
+            float q = proneTimer / 1;
+            q *= q;
+
+            if (proning)
+            {
+                controller.height = Mathf.Lerp(controller.height, (float)0.25, q);
+            }
+            else
+            {
+                controller.height = Mathf.Lerp(controller.height, 2, q);
+            }
+
+            if (q > 1)
+            {
+                lerpProne = false;
+                proneTimer = 0f;
             }
         }
     }
@@ -87,6 +113,13 @@ public class PlayerMovement : MonoBehaviour
         crouching = !crouching;
         crouchTimer = 0;
         lerpCrouch = true;
+    }
+
+    public void Prone()
+    {
+        proning = !proning;
+        proneTimer = 0;
+        lerpProne = true;
     }
 
     public void Sprint()
